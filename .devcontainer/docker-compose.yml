@@ -1,0 +1,19 @@
+version: "3"
+services:
+  golang:
+    build:
+      context: .
+    ports:
+      - "1323"
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - ..:/workspace
+      - ${HOME}/.ssh:/root/.ssh-localhost:ro
+    command: sleep infinity
+    environment:
+      - GOROOT=/usr/local/go
+  db:
+    image: postgres:11-alpine
