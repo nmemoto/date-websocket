@@ -25,9 +25,21 @@
             console.log('Connected')
         }
 
+        function zeroPadding(num) {
+            return ('00' + num).slice(-2)
+        }
+
         ws.onmessage = function (evt) {
             var out = document.getElementById('output');
-            out.innerHTML = evt.data;
+            var date = new Date(evt.data * 1000);
+            var year = date.getFullYear()
+            var month = zeroPadding(date.getMonth() + 1)
+            var day = zeroPadding(date.getDay())
+            var hour = zeroPadding(date.getHours())
+            var minutes = zeroPadding(date.getMinutes())
+            var seconds = zeroPadding(date.getSeconds())
+            var date_format = year + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds
+            out.innerHTML = date_format
         }
     </script>
 </body>

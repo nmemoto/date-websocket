@@ -18,7 +18,7 @@ func hello(c echo.Context) error {
 		defer ws.Close()
 		for now := range now(ctx, duration) {
 			// Write
-			err := websocket.Message.Send(ws, strconv.FormatInt(now.UnixNano(), 10))
+			err := websocket.Message.Send(ws, strconv.FormatInt(now.Unix(), 10))
 			if err != nil {
 				c.Logger().Error(err)
 				break
