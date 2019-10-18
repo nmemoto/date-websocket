@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"os"
 	"strconv"
 	"time"
 
@@ -34,7 +35,7 @@ func main() {
 	e.Use(middleware.Recover())
 	e.Static("/", "./public")
 	e.GET("/ws", hello)
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 }
 
 func now(ctx context.Context, duration time.Duration) <-chan time.Time {
