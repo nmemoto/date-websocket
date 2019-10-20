@@ -3,45 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-    <title>WebSocket</title>
+    <title>date websocket</title>
 </head>
 
 <body>
-    <p id="output"></p>
-
-    <script>
-        var loc = window.location;
-        var uri = 'ws:';
-
-        if (loc.protocol === 'https:') {
-            uri = 'wss:';
-        }
-        uri += '//' + loc.host;
-        uri += loc.pathname + 'ws';
-
-        ws = new WebSocket(uri)
-
-        ws.onopen = function () {
-            console.log('Connected')
-        }
-
-        function zeroPadding(num) {
-            return ('00' + num).slice(-2)
-        }
-
-        ws.onmessage = function (evt) {
-            var out = document.getElementById('output');
-            var date = new Date(evt.data * 1000);
-            var year = date.getFullYear()
-            var month = zeroPadding(date.getMonth() + 1)
-            var day = zeroPadding(date.getDay())
-            var hour = zeroPadding(date.getHours())
-            var minutes = zeroPadding(date.getMinutes())
-            var seconds = zeroPadding(date.getSeconds())
-            var date_format = year + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds
-            out.innerHTML = date_format
-        }
-    </script>
+    <div id="now">
+        {{ now }}
+    </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="app.js"></script>
 
 </html>
